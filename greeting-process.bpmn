@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0oudpr4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="1.1.0">
+  <bpmn:process id="GreetingProcess" name="Greeting Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Greeting needed">
+      <bpmn:outgoing>Flow_1ghsh2a</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1ghsh2a" sourceRef="StartEvent_1" targetRef="Activity_06yulai" />
+    <bpmn:userTask id="Activity_06yulai" name="Say Hello to People watching Twitch">
+      <bpmn:incoming>Flow_1ghsh2a</bpmn:incoming>
+      <bpmn:outgoing>Flow_16wwgwd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_1prz8oo" name="People greeted">
+      <bpmn:incoming>Flow_16wwgwd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_16wwgwd" sourceRef="Activity_06yulai" targetRef="Event_1prz8oo" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="GreetingProcess">
+      <bpmndi:BPMNEdge id="Flow_1ghsh2a_di" bpmnElement="Flow_1ghsh2a">
+        <di:waypoint x="218" y="120" />
+        <di:waypoint x="280" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16wwgwd_di" bpmnElement="Flow_16wwgwd">
+        <di:waypoint x="380" y="120" />
+        <di:waypoint x="442" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="145" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vo8b4f_di" bpmnElement="Activity_06yulai">
+        <dc:Bounds x="280" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1prz8oo_di" bpmnElement="Event_1prz8oo">
+        <dc:Bounds x="442" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="423" y="145" width="75" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
