@@ -7,8 +7,6 @@ from pyzeebe import (
     create_camunda_cloud_channel
 )
 
-
-
 async def main():
     load_dotenv()
     my_client_id = os.environ.get('Client_ID')
