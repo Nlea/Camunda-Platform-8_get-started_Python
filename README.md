@@ -1,5 +1,6 @@
 # Camunda Platform 8 - Get Started - Python
 This guide explains how to get started with [Camunda Platform 8](https://camunda.com/platform/) using Python. The project uses the [PyZeebe](https://github.com/camunda-community-hub/pyzeebe) client.
+You can find the full documentation about PyZeebe [here](https://pyzeebe.readthedocs.io/en/stable/index.html).
 
 ## Install the module
 ``` pip install pyzeebe```
@@ -59,7 +60,7 @@ To start a new instance you can specify the ```bpmnProcessId```, i.e. ```send-em
 ```python
  result = await zeebe_client.run_process(bpmn_process_id="send-email", variables={"message_content":"Hello from the Python get started"})
 ```
-For the complete code see [deploy-and-start-instance.py](https://github.com/Nlea/usingPyZeebeClient/blob/main/deploy-and-start-instance.py). You can run it using the following command:
+For the complete code see [deploy-and-start-instance.py](https://github.com/Nlea/Camunda-Platform-8_get-started_Python/blob/main/deploy-and-start-instance.py). You can run it using the following command:
 
 ```
 python deploy-and-start-instance.py
@@ -81,7 +82,7 @@ async def my_task(message_content: str):
     ##Your business logic goes here
     print('Sending email with message content: ' + message_content)
 
-    return {}
+    return
 ```
 
 The router can be used within the worker: 
@@ -91,7 +92,7 @@ The router can be used within the worker:
     worker.include_router(router)
     await worker.work()
 ```
-For the complete code see the [worker.py](https://github.com/Nlea/usingPyZeebeClient/blob/main/worker.py) and [task.py](https://github.com/Nlea/usingPyZeebeClient/blob/main/task.py) file. You can run it using the following command.
+For the complete code see the [worker.py](https://github.com/Nlea/Camunda-Platform-8_get-started_Python/blob/main/worker.py) and [task.py](https://github.com/Nlea/Camunda-Platform-8_get-started_Python/blob/main/task.py) file. You can run it using the following command.
 ```
 python worker.py
 ```
