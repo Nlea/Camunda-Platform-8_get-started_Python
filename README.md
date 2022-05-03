@@ -39,8 +39,6 @@ load_dotenv()
         )
         
     zeebe_client = ZeebeClient(grpc_channel)
-
-
 ```
 If you are using a self-managed Camunda Platform 8 cluster, you create a client with an insecure channel:
 
@@ -61,11 +59,40 @@ To start a new instance you can specify the ```bpmnProcessId```, i.e. ```send-em
 ```python
  result = await zeebe_client.run_process(bpmn_process_id="send-email", variables={"message_content":"Hello from the Python get started"})
 ```
-For the complete code see [deploy-and-start-instance.py](). You can run it using the following command:
+For the complete code see [deploy-and-start-instance.py](https://github.com/Nlea/usingPyZeebeClient/blob/main/deploy-and-start-instance.py). You can run it using the following command:
 
 ```
 python deploy-and-start-instance.py
 ```
  
 ## Job Worker
+To complete a [service task](https://docs.camunda.io/docs/components/modeler/bpmn/service-tasks/), a [job worker](https://docs.camunda.io/docs/components/concepts/job-workers/) has to be subscribed the to task type defined in the process, i.e. ```email```.:
 
+**Important:**  
+In Python [asyncio](https://docs.python.org/3/library/asyncio.html) is used to write concurrent code. 
+This makes it harder to run a worker directly, because when creating a new grpc channel a new event loop is created in asyncio. 
+You can find more information [here](https://pyzeebe.readthedocs.io/en/stable/worker_quickstart.html#create-and-start-a-worker). 
+
+The recommended and user-friendly way to create a worker is to use the ``` Taskrouter```class to route tasks to the Worker: 
+
+```python
+@router.task(task_type="mail")
+async def my_task(message_content: str):
+    ##Your business logic goes here
+    print('Sending email with message content: ' + message_content)
+
+    return {}
+```
+
+The router can be used within the worker: 
+
+```python
+    worker = ZeebeWorker(channel) 
+    worker.include_router(router)
+    await worker.work()
+```
+For the complete code see the [worker.py](https://github.com/Nlea/usingPyZeebeClient/blob/main/worker.py) and [task.py](https://github.com/Nlea/usingPyZeebeClient/blob/main/task.py) file. You can run it using the following command.
+```
+python worker.py
+```
+To make a job available, a user task has to be completed, follow the instructions in [the guide](https://github.com/camunda/camunda-platform-get-started/blob/main/README.md#complete-the-user-task).
