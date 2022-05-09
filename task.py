@@ -1,4 +1,3 @@
-import worker
 from pyzeebe import ZeebeTaskRouter
 
 router = ZeebeTaskRouter()
